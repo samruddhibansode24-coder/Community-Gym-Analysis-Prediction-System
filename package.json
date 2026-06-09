@@ -1,0 +1,11 @@
+{
+  "name": "gym-website",
+  "version": "1.0.0",
+  "description": "Full-stack gym website — Node.js + MySQL + Flask ML",
+  "scripts": {
+    "install:backend": "cd backend && npm install",
+    "start:backend": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev": "npm run dev:backend"
+  }
+}

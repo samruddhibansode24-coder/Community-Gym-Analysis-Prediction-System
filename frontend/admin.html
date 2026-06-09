@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — 2N Sports and Fitness</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- ── SIDEBAR ─────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">2N Sports And Fitness</div>
+    <div class="sidebar-admin">
+      <div class="admin-avatar" id="adminAvatar">A</div>
+      <div>
+        <div class="admin-name" id="adminNameDisplay">Admin</div>
+        <div class="admin-role">Administrator</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item" data-panel="dashboard">
+        <span class="nav-icon">⬡</span> Dashboard
+      </div>
+      <div class="nav-item" data-panel="users">
+        <span class="nav-icon">👤</span> Users
+        <span class="nav-badge" id="badgeUsers">0</span>
+      </div>
+      <div class="nav-item" data-panel="reviews">
+        <span class="nav-icon">⭐</span> Reviews
+      </div>
+      <div class="nav-item" data-panel="enquiries">
+        <span class="nav-icon">📩</span> Enquiries
+        <span class="nav-badge" id="badgeEnquiries">0</span>
+      </div>
+      <div class="nav-item" data-panel="images">
+        <span class="nav-icon">🖼</span> Gallery
+      </div>
+      <div class="nav-item" data-panel="timings">
+        <span class="nav-icon">⏰</span> Timings
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" id="logoutBtn">
+        ⏻ &nbsp;Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ────────────────────────────────────── -->
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-right">
+        <span class="topbar-date" id="topbarDate"></span>
+        <a href="index.html" class="view-site-btn" target="_blank">↗ View Site</a>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- DASHBOARD PANEL -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="panel-header">
+          <div class="panel-title">Overview <span>Stats</span></div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon">👤</div>
+            <div><div class="stat-info-num" id="statUsers">—</div><div class="stat-info-label">Total Users</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div><div class="stat-info-num" id="statReviews">—</div><div class="stat-info-label">Reviews</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📩</div>
+            <div><div class="stat-info-num" id="statEnquiries">—</div><div class="stat-info-label">Enquiries</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🖼</div>
+            <div><div class="stat-info-num" id="statImages">—</div><div class="stat-info-label">Gallery Images</div></div>
+          </div>
+        </div>
+        <div style="background:var(--dark2);border:1px solid var(--grey);border-radius:var(--radius);padding:28px;margin-top:8px">
+          <div style="font-family:var(--font-head);font-size:1.2rem;letter-spacing:2px;color:var(--white);margin-bottom:16px">QUICK ACTIONS</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-outline" onclick="setPanel('users');loadUsers()">Manage Users</button>
+            <button class="btn btn-outline" onclick="setPanel('enquiries');loadEnquiries()">View Enquiries</button>
+            <button class="btn btn-outline" onclick="setPanel('images');loadImages()">Upload Images</button>
+            <button class="btn btn-outline" onclick="setPanel('timings');loadAdminTimings()">Edit Timings</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- USERS PANEL -->
+      <div class="panel" id="panel-users">
+        <div class="panel-header">
+          <div class="panel-title">Manage <span>Users</span></div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="usersBody">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--grey3)">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- REVIEWS PANEL -->
+      <div class="panel" id="panel-reviews">
+        <div class="panel-header">
+          <div class="panel-title">Manage <span>Reviews</span></div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>ID</th><th>User</th><th>Rating</th><th>Review</th><th>Date</th><th>Action</th></tr>
+            </thead>
+            <tbody id="reviewsBody">
+              <tr><td colspan="6" style="text-align:center;padding:30px;color:var(--grey3)">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ENQUIRIES PANEL -->
+      <div class="panel" id="panel-enquiries">
+        <div class="panel-header">
+          <div class="panel-title">View <span>Enquiries</span></div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Date</th><th>Action</th></tr>
+            </thead>
+            <tbody id="enquiriesBody">
+              <tr><td colspan="7" style="text-align:center;padding:30px;color:var(--grey3)">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- GALLERY PANEL -->
+      <div class="panel" id="panel-images">
+        <div class="panel-header">
+          <div class="panel-title">Gallery <span>Images</span></div>
+        </div>
+        <div style="background:var(--dark2);border:1px solid var(--grey);border-radius:var(--radius);padding:28px;margin-bottom:24px">
+          <div style="font-family:var(--font-sub);font-size:.9rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:20px">Upload New Image</div>
+          <div class="upload-zone" id="uploadZone">
+            <div class="upload-icon">📁</div>
+            <div class="upload-text">Drag &amp; drop or <span>browse files</span></div>
+            <div style="font-size:.75rem;color:var(--grey3);margin-top:6px;font-family:var(--font-sub)">JPG, PNG, WEBP • Max 5MB</div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" class="hidden">
+          <div class="form-group">
+            <label class="form-label" for="imageCaption">Caption (optional)</label>
+            <input type="text" id="imageCaption" class="form-control" placeholder="e.g. Weight Training Area">
+          </div>
+          <button class="btn btn-red" id="uploadBtn">Upload Image</button>
+        </div>
+        <div style="font-family:var(--font-sub);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--grey3);margin-bottom:16px">Current Gallery</div>
+        <div class="img-grid" id="imagesGrid">
+          <div style="text-align:center;padding:40px;color:var(--grey3)"><span class="spinner"></span></div>
+        </div>
+      </div>
+
+      <!-- TIMINGS PANEL -->
+      <div class="panel" id="panel-timings">
+        <div class="panel-header">
+          <div class="panel-title">Edit <span>Timings</span></div>
+        </div>
+        <div style="background:var(--dark2);border:1px solid var(--grey);border-radius:var(--radius);padding:28px">
+          <div style="display:grid;grid-template-columns:120px 1fr 1fr 100px auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--grey);margin-bottom:4px">
+            <div style="font-family:var(--font-sub);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--grey3)">Day</div>
+            <div style="font-family:var(--font-sub);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--grey3)">Opens</div>
+            <div style="font-family:var(--font-sub);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--grey3)">Closes</div>
+            <div style="font-family:var(--font-sub);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--grey3)">Status</div>
+            <div></div>
+          </div>
+          <div id="timingsEditor">
+            <div style="text-align:center;padding:40px;color:var(--grey3)"><span class="spinner"></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </main>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal-overlay hidden" id="confirmModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-title" style="font-size:1.4rem">Confirm Action</div>
+    <p id="confirmMessage" style="color:var(--grey3);margin:16px 0 24px;font-size:.95rem;line-height:1.6"></p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="confirmNo">Cancel</button>
+      <button class="btn btn-red" id="confirmYes">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

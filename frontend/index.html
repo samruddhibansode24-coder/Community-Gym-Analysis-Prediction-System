@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2N Sports and Fitness — Transform Your Body, Transform Your Life</title>
+  <meta name="description" content="2N Sports and Fitness: State-of-the-art equipment, expert trainers, personalized plans.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏋️</text></svg>">
+</head>
+<body>
+
+<!-- ── NAVBAR ───────────────────────────────────────── -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a class="nav-logo" href="#home">2N <span>Sports</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#timings">Timings</a></li>
+      <li><a href="#address">Location</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#enquiry">Contact</a></li>
+      <li><a href="#fitness">Fitness AI</a></li>
+    </ul>
+    <div class="nav-auth" id="navAuth">
+      <button class="btn btn-ghost btn-sm" id="navLoginBtn">Member Login</button>
+      <button class="btn btn-ghost btn-sm" id="navAdminLoginBtn">Admin Login</button>
+      <button class="btn btn-red btn-sm" id="navSignupBtn">Join Free</button>
+      <div class="hidden" id="navUserMenu" style="display:flex;align-items:center;gap:12px">
+        <span id="navUserName" style="font-family:var(--font-sub);font-size:.9rem;color:var(--white2);letter-spacing:1px"></span>
+        <a href="admin.html" class="btn btn-outline btn-sm hidden" id="navAdminLink">Dashboard</a>
+        <button class="btn btn-ghost btn-sm" id="navLogoutBtn">Logout</button>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#timings">Timings</a>
+  <a href="#address">Location</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#enquiry">Contact</a>
+  <a href="#fitness">Fitness AI</a>
+  <div class="mobile-auth">
+    <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login', 'user')">Member Login</button>
+    <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login', 'admin')">Admin Login</button>
+    <button class="btn btn-red btn-sm" onclick="openAuthModal('register')">Join Free</button>
+  </div>
+</div>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">Pune's Premium Fitness Center</div>
+      <h1 class="hero-title">
+        Transform Your Body,
+        <span class="accent">Transform Your Life</span>
+      </h1>
+      <p class="hero-sub">State-of-the-art equipment, expert trainers, and a community that pushes you further. Your transformation starts today.</p>
+      <div class="hero-cta">
+        <button class="btn btn-red" id="heroJoinBtn">Join Now →</button>
+        <a href="#timings" class="btn btn-outline">View Timings</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-box"><div class="stat-num">500+</div><div class="stat-label">Members</div></div>
+    <div class="stat-box"><div class="stat-num">10+</div><div class="stat-label">Trainers</div></div>
+    <div class="stat-box"><div class="stat-num">5★</div><div class="stat-label">Rated</div></div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── GALLERY ──────────────────────────────────────── -->
+<section class="gallery section" id="gallery">
+  <div class="container">
+    <p class="section-sub">Our Facility</p>
+    <h2 class="section-title">World-Class <span>Equipment</span></h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Loaded by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ── TIMINGS ──────────────────────────────────────── -->
+<section class="timings section" id="timings">
+  <div class="container">
+    <p class="section-sub">Opening Hours</p>
+    <h2 class="section-title">Gym <span>Timings</span></h2>
+    <div class="timings-wrap">
+      <div class="timings-card">
+        <table class="timings-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Opens</th>
+              <th>Closes</th>
+            </tr>
+          </thead>
+          <tbody id="timingsBody">
+            <tr><td colspan="3" style="text-align:center;padding:20px;color:var(--grey3)">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="status-box" id="gymStatus">
+          <div class="status-indicator">
+            <div class="status-dot closed"></div>
+            <span class="status-text closed">Checking...</span>
+          </div>
+          <div class="status-detail" style="font-family:var(--font-head);font-size:1.8rem;color:var(--white);margin-bottom:8px">—</div>
+          <p style="font-family:var(--font-sub);font-size:.85rem;color:var(--grey3);letter-spacing:1px">Current gym status based on today's schedule</p>
+          <div class="holiday-note">
+            <strong>ℹ Note:</strong> Business hours may vary on holidays
+            (<strong>Eid-ul-Fitr</strong>, <strong>Gudi Padwa</strong>).
+            Please call ahead to confirm.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ADDRESS ──────────────────────────────────────── -->
+<section class="address section" id="address">
+  <div class="container">
+    <p class="section-sub">Find Us</p>
+    <h2 class="section-title">Our <span>Location</span></h2>
+    <div class="address-wrap">
+      <div class="address-card">
+        <div class="address-line">
+          <div class="address-icon">📍</div>
+          <div class="address-info">
+            <div class="address-label">Address</div>
+            <div class="address-val">
+              Narmada Garden Campus Sr. No. 38/2/1<br>
+              In Front Of Baselio Society<br>
+              M.S. Kate Chowk, Pimple Gurav<br>
+              Pune – 411061, Maharashtra
+            </div>
+          </div>
+        </div>
+        <div class="address-line">
+          <div class="address-icon">⏰</div>
+          <div class="address-info">
+            <div class="address-label">Hours</div>
+            <div class="address-val">Mon–Sat: 6:00 AM – 10:00 PM<br>Sunday: Closed</div>
+          </div>
+        </div>
+        <div class="address-line">
+          <div class="address-icon">📞</div>
+          <div class="address-info">
+            <div class="address-label">Phone</div>
+            <div class="address-val">+91 98765 43210</div>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps?q=Narmada+Garden+Campus+Pimple+Gurav+Pune"
+           target="_blank" rel="noopener" class="btn btn-red" style="margin-top:24px;justify-content:center">
+          📍 Get Directions
+        </a>
+      </div>
+      <div class="map-preview"
+           onclick="window.open('https://www.google.com/maps?q=Narmada+Garden+Campus+Pimple+Gurav+Pune','_blank')">
+        <div class="map-icon">🗺</div>
+        <p>Narmada Garden Campus<br>Pimple Gurav, Pune</p>
+        <span style="color:var(--red);font-family:var(--font-sub);font-size:.8rem;letter-spacing:2px;margin-top:8px">CLICK TO OPEN MAPS →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ──────────────────────────────────────── -->
+<section class="reviews section" id="reviews">
+  <div class="container">
+    <p class="section-sub">Member Feedback</p>
+    <h2 class="section-title">Ratings &amp; <span>Reviews</span></h2>
+    <div class="reviews-stats">
+      <div class="avg-num" id="avgRating">—</div>
+      <div>
+        <div class="avg-stars" id="avgStars"></div>
+        <div class="avg-total" id="totalReviews">Loading...</div>
+      </div>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid">
+      <div style="text-align:center;padding:40px;color:var(--grey3);font-family:var(--font-sub)">Loading reviews...</div>
+    </div>
+    <!-- Write a Review -->
+    <div class="form-wrap" style="max-width:600px">
+      <div class="form-title">Write a Review</div>
+      <form id="reviewFormEl">
+        <div class="form-group">
+          <div class="form-label">Your Rating</div>
+          <div class="star-picker">
+            <button type="button" class="star-btn" data-val="1">★</button>
+            <button type="button" class="star-btn" data-val="2">★</button>
+            <button type="button" class="star-btn" data-val="3">★</button>
+            <button type="button" class="star-btn" data-val="4">★</button>
+            <button type="button" class="star-btn" data-val="5">★</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reviewText">Your Review</label>
+          <textarea id="reviewText" class="form-control" rows="4" placeholder="Share your experience..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-red">Submit Review</button>
+        <p style="margin-top:12px;font-family:var(--font-sub);font-size:.8rem;color:var(--grey3)">You must be logged in to leave a review.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── ENQUIRY ──────────────────────────────────────── -->
+<section class="enquiry section" id="enquiry">
+  <div class="container">
+    <p class="section-sub">Get In Touch</p>
+    <h2 class="section-title">Send an <span>Enquiry</span></h2>
+    <div class="enquiry-wrap">
+      <div class="enquiry-info">
+        <h3>We'd love to hear from you</h3>
+        <p>Have questions about membership, training programmes, or our facilities? Fill out the form and our team will get back to you within 24 hours.</p>
+        <div class="contact-item"><div class="icon">📍</div><span>Pimple Gurav, Pune – 411061</span></div>
+        <div class="contact-item"><div class="icon">📞</div><span>+91 98765 43210</span></div>
+        <div class="contact-item"><div class="icon">✉</div><span>info@2nsportsandfitness.in</span></div>
+        <div class="contact-item"><div class="icon">⏰</div><span>Mon–Sat, 6 AM – 10 PM</span></div>
+      </div>
+      <div class="form-wrap enquiry-form">
+        <div class="form-title">Contact Form</div>
+        <form id="enquiryFormEl">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="enqName">Full Name *</label>
+              <input type="text" id="enqName" class="form-control" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="enqEmail">Email *</label>
+              <input type="email" id="enqEmail" class="form-control" placeholder="your@email.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="enqPhone">Phone Number</label>
+            <input type="tel" id="enqPhone" class="form-control" placeholder="+91 98765 43210">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="enqMessage">Message *</label>
+            <textarea id="enqMessage" class="form-control" rows="5" placeholder="Tell us how we can help..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-red">Send Enquiry →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FITNESS AI ────────────────────────────────────── -->
+<section class="ml-section section" id="fitness">
+  <div class="container">
+    <p class="section-sub">AI-Powered</p>
+    <h2 class="section-title">Fitness <span>Advisor</span></h2>
+    <p style="color:var(--grey3);font-size:1rem;margin-top:8px;margin-bottom:0;max-width:600px">Get personalised workout plans and diet recommendations powered by our ML model. Enter your details below.</p>
+    <div class="ml-grid">
+      <div class="form-wrap">
+        <div class="form-title">Your Profile</div>
+        <form id="mlFormEl">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="mlWeight">Weight (kg) *</label>
+              <input type="number" id="mlWeight" class="form-control" placeholder="70" min="30" max="250" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mlHeight">Height (cm) *</label>
+              <input type="number" id="mlHeight" class="form-control" placeholder="170" min="100" max="250" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="mlAge">Age</label>
+              <input type="number" id="mlAge" class="form-control" placeholder="25" min="12" max="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="mlSex">Sex</label>
+              <select id="mlSex" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fitnessGoal">Fitness Goal</label>
+            <select id="fitnessGoal" class="form-control">
+              <option value="">Select goal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="form-label">Medical Conditions</div>
+            <div class="form-check">
+              <input type="checkbox" id="mlHypertension">
+              <label for="mlHypertension">Hypertension (High Blood Pressure)</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="mlDiabetes">
+              <label for="mlDiabetes">Diabetes</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-red">Get My Plan →</button>
+        </form>
+      </div>
+      <div class="form-wrap" id="mlResult">
+        <div class="ml-placeholder">
+          <div class="icon">🤖</div>
+          <p>Fill in your details and click<br><strong style="color:var(--white)">"Get My Plan"</strong><br>to receive AI-powered recommendations</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="nav-logo">2N <span>Sports</span></span>
+        <p>2N Sports and Fitness — committed to helping you reach your goals with world-class facilities and expert guidance.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#timings">Timings</a>
+          <a href="#address">Location</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <div class="footer-links">
+          <a href="#reviews">Reviews</a>
+          <a href="#enquiry">Contact</a>
+          <a href="#fitness">Fitness AI</a>
+          <a href="admin.html">Admin</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 <span>2N Sports and Fitness</span>. All rights reserved.</p>
+      <p class="footer-copy">Narmada Garden Campus, Pimple Gurav, Pune</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── AUTH MODAL ────────────────────────────────────── -->
+<div class="modal-overlay hidden" id="authModal">
+  <div class="modal">
+    <button class="modal-close">✕</button>
+    <div class="modal-title" id="modalTitle">Welcome Back</div>
+    <div class="modal-sub" id="modalSub">Sign in to your account</div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <form id="loginFormEl">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="Your password" required>
+        </div>
+        <button type="submit" class="btn btn-red">Sign In</button>
+      </form>
+      <div class="modal-toggle">
+        Don't have an account? <a id="switchToRegister">Create one →</a>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="hidden">
+      <form id="registerFormEl">
+        <div class="form-group">
+          <label class="form-label" for="regName">Full Name</label>
+          <input type="text" id="regName" class="form-control" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Password</label>
+          <input type="password" id="regPassword" class="form-control" placeholder="Min 6 characters" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="regConfirm">Confirm Password</label>
+          <input type="password" id="regConfirm" class="form-control" placeholder="Repeat password" required>
+        </div>
+        <button type="submit" class="btn btn-red">Create Account</button>
+      </form>
+      <div class="modal-toggle">
+        Already have an account? <a id="switchToLogin">Sign in →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
